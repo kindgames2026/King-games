@@ -11,60 +11,157 @@
             font-family: Tahoma, sans-serif;
             text-align: center;
             margin: 0;
-            padding: 30px;
+            padding: 15px;
         }
-        h1 { color: #38bdf8; margin-bottom: 20px; }
-        .card {
+        h1 { color: #38bdf8; margin: 10px 0; font-size: 24px; }
+        .score-box {
             background: #1e293b;
-            border-radius: 16px;
-            padding: 30px;
-            max-width: 350px;
-            margin: 0 auto;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px auto;
+            max-width: 360px;
+            border: 1px solid #334155;
         }
-        .score {
-            font-size: 40px;
-            font-weight: bold;
-            color: #facc15;
-            margin: 20px 0;
-        }
+        .score { font-size: 36px; font-weight: bold; color: #facc15; margin: 5px 0; }
+        .energy { font-size: 14px; color: #34d399; font-weight: bold; }
         .tap-btn {
-            background: linear-gradient(135deg, #facc15, #eab308);
+            background: radial-gradient(circle, #facc15, #eab308);
             color: #0f172a;
-            border: none;
+            border: 4px solid #fef08a;
             border-radius: 50%;
             width: 140px;
             height: 140px;
             font-size: 24px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 6px 20px rgba(250, 204, 21, 0.4);
+            box-shadow: 0 0 25px rgba(250, 204, 21, 0.5);
             transition: 0.1s;
+            margin: 15px 0;
         }
-        .tap-btn:active {
-            transform: scale(0.92);
+        .tap-btn:active { transform: scale(0.92); }
+        .section {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 360px;
+            text-align: right;
+        }
+        .section h3 { margin: 0 0 10px 0; color: #38bdf8; font-size: 16px; border-bottom: 1px solid #334155; padding-bottom: 8px; }
+        .task-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        .btn-small {
+            background-color: #38bdf8;
+            color: #0f172a;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .btn-small:disabled { background-color: #475569; color: #94a3b8; cursor: not-allowed; }
+        .wheel-btn {
+            background: linear-gradient(45deg, #ec4899, #8b5cf6);
+            color: white;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 5px;
         }
     </style>
 </head>
 <body>
 
     <h1>👑 King Games 👑</h1>
-    
-    <div class="card">
-        <p>رصيدك الحالي:</p>
+
+    <div class="score-box">
+        <div>رصيدك الحالي</div>
         <div class="score" id="score">0</div>
-        
-        <button class="tap-btn" onclick="addPoint()">اضغط 💰</button>
+        <div class="energy">⚡ الطاقة: <span id="energy">100</span> / 100</div>
+        <button class="tap-btn" onclick="tapCoin()">اضغط 💰</button>
+    </div>
+
+    <div class="section">
+        <h3>🎡 عجلة الحظ السريعة</h3>
+        <p style="font-size: 13px; color: #cbd5e1; margin: 0 0 10px 0;">جرب حظك واكسب نقاط مجاناً!</p>
+        <button class="wheel-btn" id="spinBtn" onclick="spinWheel()">لف العجلة 🎲</button>
+    </div>
+
+    <div class="section">
+        <h3>📋 المهام اليومية</h3>
+        <div class="task-item">
+            <span>🎁 مكافأة الدخول اليومي (+50)</span>
+            <button class="btn-small" id="task1" onclick="claimTask('task1', 50)">استلم</button>
+        </div>
+        <div class="task-item">
+            <span>📢 متابعة قناة الألعاب (+100)</span>
+            <button class="btn-small" id="task2" onclick="claimTask('task2', 100)">تنفيذ</button>
+        </div>
     </div>
 
     <script>
         let score = parseInt(localStorage.getItem('kg_score')) || 0;
+        let energy = 100;
+
         document.getElementById("score").innerText = score;
 
-        function addPoint() {
-            score += 1;
+        function updateScore(points) {
+            score += points;
             document.getElementById("score").innerText = score;
             localStorage.setItem('kg_score', score);
+        }
+
+        function tapCoin() {
+            if (energy > 0) {
+                energy -= 1;
+                document.getElementById("energy").innerText = energy;
+                updateScore(1);
+            } else {
+                alert("⚡ طاقتك خلصت! انتظر ثواني لتشحن.");
+            }
+        }
+
+        setInterval(() => {
+            if (energy < 100) {
+                energy += 1;
+                document.getElementById("energy").innerText = energy;
+            }
+        }, 2000);
+
+        function spinWheel() {
+            const prizes = [10, 20, 50, 100, 5, 30];
+            const win = prizes[Math.floor(Math.random() * prizes.length)];
+            updateScore(win);
+            alert("🎉 مبروك! كسبت " + win + " نقطة من عجلة الحظ!");
+            const btn = document.getElementById("spinBtn");
+            btn.disabled = true;
+            btn.innerText = "ارجع تاني بعد شوية ⏳";
+            setTimeout(() => {
+                btn.disabled = false;
+                btn.innerText = "لف العجلة 🎲";
+            }, 15000);
+        }
+
+        function claimTask(btnId, reward) {
+            const btn = document.getElementById(btnId);
+            if (!btn.disabled) {
+                updateScore(reward);
+                btn.disabled = true;
+                btn.innerText = "تم ✔️";
+                alert("👏 ممتاز! تمت إضافة " + reward + " نقطة.");
+            }
         }
     </script>
 
