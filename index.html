@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة التحدي</title>
+    <style>
+        body { font-family: Tahoma, sans-serif; text-align: center; background-color: #0f172a; color: white; padding: 40px; }
+        h1 { color: #38bdf8; }
+        .card { background: #1e293b; padding: 20px; border-radius: 12px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
+        button { background-color: #38bdf8; color: #0f172a; border: none; padding: 12px 24px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 15px; }
+        button:hover { background-color: #0ea5e9; }
+    </style>
+</head>
+<body>
+    <h1>🎮 لعبة التحدي الكبرى</h1>
+    <div class="card">
+        <p id="question">ما هي عاصمة دولة مصر؟</p>
+        <button onclick="checkAnswer()">القاهرة</button>
+    </div>
+
+    <script>
+        function checkAnswer() {
+            alert('إجابة صحيحة! لقد ربحت 10 نقاط 🎉');
+        }
+    </script>
+</body>
+</html>
