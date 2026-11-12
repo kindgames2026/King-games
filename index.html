@@ -12,6 +12,7 @@
             text-align: center;
             margin: 0;
             padding: 15px;
+            padding-bottom: 70px; /* مساحة عشان الإعلان ما يغطيقش المحتوى */
         }
         h1 { color: #38bdf8; margin: 10px 0; font-size: 24px; }
         .card {
@@ -101,6 +102,18 @@
             font-weight: bold;
             cursor: pointer;
         }
+        /* تصميم مكان الإعلان الثابت أسفل الشاشة */
+        .ad-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #1e293b;
+            border-top: 1px solid #334155;
+            padding: 8px 0;
+            text-align: center;
+            z-index: 1000;
+        }
     </style>
 </head>
 <body>
@@ -140,6 +153,14 @@
         <label style="font-size: 12px; color: #cbd5e1;">معرف محفظتك أو فودافون كاش:</label>
         <input type="text" id="walletInput" class="input-field" placeholder="اكتب رقمك أو محفظتك هنا...">
         <button class="withdraw-btn" onclick="requestWithdraw()">إرسال طلب السحب 📤</button>
+    </div>
+
+    <!-- مكان إدراج إعلانات البانر (مكان مخصص لربطك مع أي شبكة إعلانية مثل Adsterra أو Monetag) -->
+    <div class="ad-container">
+        <!-- ضع كود الإعلان الخاص بك هنا بدلاً من النص التجريبي -->
+        <div style="font-size: 12px; color: #94a3b8; padding: 5px;">
+            📢 مساحة إعلانية (Banner Ad)
+        </div>
     </div>
 
     <script>
@@ -188,27 +209,5 @@
         function claimTask(btnId, reward) {
             const btn = document.getElementById(btnId);
             if (!btn.disabled) {
-                updateScore(reward);
-                btn.disabled = true;
-                btn.innerText = "تم ✔️";
-                alert("👏 ممتاز! تمت إضافة " + reward + " نقطة.");
-            }
-        }
-
-        function requestWithdraw() {
-            const wallet = document.getElementById('walletInput').value.trim();
-            if (!wallet) {
-                alert("⚠️ من فضلك اكتب رقم المحفظة أو الحساب أولاً!");
-                return;
-            }
-            if (score < 500) {
-                alert("❌ الحد الأدنى للسحب هو 500 نقطة! رصيدك الحالي غير كافٍ.");
-                return;
-            }
-            alert("✅ تم إرسال طلب السحب بنجاح للمراجعة اليدوية!\nسيتم التواصل معك وتحويل الأرباح قريباً.");
-            document.getElementById('walletInput').value = "";
-        }
-    </script>
-
-</body>
-    </html>
+                updateScore(
+            
