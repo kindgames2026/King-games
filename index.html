@@ -3,26 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>لعبة التحدي</title>
+    <title>King Games</title>
     <style>
-        body { font-family: Tahoma, sans-serif; text-align: center; background-color: #0f172a; color: white; padding: 40px; }
-        h1 { color: #38bdf8; }
-        .card { background: #1e293b; padding: 20px; border-radius: 12px; margin-top: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
-        button { background-color: #38bdf8; color: #0f172a; border: none; padding: 12px 24px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; margin-top: 15px; }
-        button:hover { background-color: #0ea5e9; }
-    </style>
-</head>
-<body>
-    <h1>🎮 لعبة التحدي الكبرى</h1>
-    <div class="card">
-        <p id="question">ما هي عاصمة دولة مصر؟</p>
-        <button onclick="checkAnswer()">القاهرة</button>
-    </div>
-
-    <script>
-        function checkAnswer() {
-            alert('إجابة صحيحة! لقد ربحت 10 نقاط 🎉');
+        body {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-family: Tahoma, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 15px;
         }
-    </script>
-</body>
-</html>
+        h1 { color: #38bdf8; margin: 10px 0; font-size: 24px; }
+        .score-box {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 10px auto;
+            max-width: 360px;
+            border: 1px solid #334155;
+        }
+        .score { font-size: 36px; font-weight: bold; color: #facc15; margin: 5px 0; }
+        .energy { font-size: 14px; color: #34d399; font-weight: bold; }
+        .tap-btn {
+            background: radial-gradient(circle, #facc15, #eab308);
+            color: #0f172a;
+            border: 4px solid #fef08a;
+            border-radius: 50%;
+            width: 140px;
+            height: 140px;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(250, 204, 21, 0.5);
+            transition: 0.1s;
+            margin: 15px 0;
+        }
+        .tap-btn:active { transform: scale(0.92); }
+        .section {
+            background: #1e293b;
+            border-radius: 15px;
+            padding: 15px;
+            margin: 15px auto;
+            max-width: 360px;
+            text-align: right;
+        }
+        .section h3 { margin: 0 0 10px 0; color: #38bdf
