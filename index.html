@@ -11,40 +11,62 @@
             font-family: Tahoma, sans-serif;
             text-align: center;
             margin: 0;
-            padding: 15px;
+            padding: 30px;
         }
-        h1 { color: #38bdf8; margin: 10px 0; font-size: 24px; }
-        .score-box {
+        h1 { color: #38bdf8; margin-bottom: 20px; }
+        .card {
             background: #1e293b;
-            border-radius: 15px;
-            padding: 15px;
-            margin: 10px auto;
-            max-width: 360px;
-            border: 1px solid #334155;
+            border-radius: 16px;
+            padding: 30px;
+            max-width: 350px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
         }
-        .score { font-size: 36px; font-weight: bold; color: #facc15; margin: 5px 0; }
-        .energy { font-size: 14px; color: #34d399; font-weight: bold; }
+        .score {
+            font-size: 40px;
+            font-weight: bold;
+            color: #facc15;
+            margin: 20px 0;
+        }
         .tap-btn {
-            background: radial-gradient(circle, #facc15, #eab308);
+            background: linear-gradient(135deg, #facc15, #eab308);
             color: #0f172a;
-            border: 4px solid #fef08a;
+            border: none;
             border-radius: 50%;
             width: 140px;
             height: 140px;
             font-size: 24px;
             font-weight: bold;
             cursor: pointer;
-            box-shadow: 0 0 25px rgba(250, 204, 21, 0.5);
+            box-shadow: 0 6px 20px rgba(250, 204, 21, 0.4);
             transition: 0.1s;
-            margin: 15px 0;
         }
-        .tap-btn:active { transform: scale(0.92); }
-        .section {
-            background: #1e293b;
-            border-radius: 15px;
-            padding: 15px;
-            margin: 15px auto;
-            max-width: 360px;
-            text-align: right;
+        .tap-btn:active {
+            transform: scale(0.92);
         }
-        .section h3 { margin: 0 0 10px 0; color: #38bdf
+    </style>
+</head>
+<body>
+
+    <h1>👑 King Games 👑</h1>
+    
+    <div class="card">
+        <p>رصيدك الحالي:</p>
+        <div class="score" id="score">0</div>
+        
+        <button class="tap-btn" onclick="addPoint()">اضغط 💰</button>
+    </div>
+
+    <script>
+        let score = parseInt(localStorage.getItem('kg_score')) || 0;
+        document.getElementById("score").innerText = score;
+
+        function addPoint() {
+            score += 1;
+            document.getElementById("score").innerText = score;
+            localStorage.setItem('kg_score', score);
+        }
+    </script>
+
+</body>
+</html>
